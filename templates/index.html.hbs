@@ -1,19 +1,27 @@
-VIGILANT
 
-<img src="/static/placeholder.png" alt="placeholder image">
+<head>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+ <script src="/static/script.js"></script> 
 
-<script>
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/report");
+<style>
+    .mapboxgl-marker {
+        height: 20px;
+        width: 20px;
+        z-index: 5;
+        border: 1px solid black;
+        border-radius: 50%;
+        background-color: #305bad;
+    }
+</style>
 
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Content-Type", "application/json");
+</head>
 
-    xhr.onload = () => console.log(xhr.responseText);
+<body>
+    <div id='map' style='width: 400px; height: 300px;'></div>
 
-    let data = `{
-        "Id": 78912
-    }`;
 
-    xhr.send(data);
+    <script>
+  
 </script>
+</body>
