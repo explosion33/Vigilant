@@ -1,0 +1,48 @@
+
+<head>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+
+<style>
+    .mapboxgl-marker {
+        height: 20px;
+        width: 20px;
+        z-index: 5;
+        border: 1px solid black;
+        border-radius: 50%;
+        background-color: #305bad;
+    }
+</style>
+
+</head>
+
+<body>
+    <div id='map' style='width: 400px; height: 300px;'></div>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoid2FybXN0IiwiYSI6ImNsOWJydXhzNjNyN2EzdmxmZW00bDN0OTEifQ.4pmON-6Tdj9ca_T8_8D_dw';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11'
+  });
+
+  map.on('click', (e) => {
+    var coords = `lat: ${e.lngLat.lat} <br> lng: ${e.lngLat.lng}`;
+
+    console.log(e.lngLat.lat);
+    console.log(e.lngLat.lng);
+
+    // create the popup
+    var popup = new mapboxgl.Popup().setText(coords);
+
+    // create DOM element for the marker
+    var el = document.createElement('div');
+    el.id = 'marker';
+
+    // create the marker
+    new mapboxgl.Marker(el)
+        .setLngLat(e.lngLat)
+        .setPopup(popup)
+        .addTo(map);
+  });
+</script>
+</body>
