@@ -23,4 +23,21 @@
 
 </body>
 
+
+
 <script src="/static/map.js"></script> 
+
+<script>
+window.onload = function WindowLoad(event) {
+{{#each crimes}}
+    var popup = new mapboxgl.Popup().setText(coords);
+    var el = document.createElement('div');
+    var coords = `lat: {{this.long}} <br> lng: {{this.lat}}`;
+    el.id = 'marker';
+    new mapboxgl.Marker(el)
+        .setLngLat([{{this.long}}, {{this.lat}}])
+        .setPopup(popup)
+        .addTo(map);   
+{{/each}}
+}
+</script>

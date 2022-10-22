@@ -10,7 +10,8 @@ let post_crime = function(lat, long, desc) {
     let data = {
         "lat": lat,
         "long": long,
-        "desc": desc
+        "desc": desc,
+        "loc": ""
     };
 
     xhr.send(JSON.stringify(data));

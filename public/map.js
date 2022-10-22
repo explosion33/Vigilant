@@ -5,6 +5,8 @@ var map = new mapboxgl.Map({
 });
 
 map.on('click', (e) => {
+    var coords = `lat: ${e.lngLat.lat} <br> lng: ${e.lngLat.lng}`;
+    
     console.log(e.lngLat.lat);
     console.log(e.lngLat.lng);
 
