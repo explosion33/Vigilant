@@ -1,2 +1,2 @@
-# DH22
-repository for dub hacks 2022 project
+# Vigilant
+Our DubHacks '22 crime reporting and monitoring app
