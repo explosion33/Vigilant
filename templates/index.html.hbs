@@ -37,7 +37,14 @@
             <button id="submit" onclick="submitForm()">Submit</button>
         </div>
 
-    </div> 
+    </div>
+
+    <form>
+        <label for="num">Enter phone number</label><br>
+        <input type="text" id="phone_num" name="num"><br>
+    </form> 
+    <p id="prompt" style="display: none">Please select a location to be notified for</p>
+    <button id="myBtn" onclick="isRegistering = true; document.getElementById('prompt').style.display='block'">Register</button>
 
 
 </body>

@@ -5,13 +5,13 @@ var map = new mapboxgl.Map({
 });
 
 var canReport = false;
+var isRegistering = false;
 
 var lat = 0;
 var long = 0;
 
 map.on('click', (e) => {
-    if (canReport) {
-        displayForm();
+    if (canReport || isRegistering) {
         let old_marker = document.getElementById("user marker");
 
         if (old_marker != null) {
@@ -37,5 +37,23 @@ map.on('click', (e) => {
         lat = e.lngLat.lat;
         long = e.lngLat.lng;
     }
-        
+    
+    if (canReport) {
+        displayForm();
+    }
+
+    else if (isRegistering) {
+        register_user(parseInt(document.getElementById("phone_num").value), lat, long);
+        isRegistering = false;
+
+        let old_marker = document.getElementById("user marker");
+
+        if (old_marker != null) {
+            old_marker.remove();
+        }
+
+        document.getElementById("prompt").style.display = "none";
+
+    }
+
   });
