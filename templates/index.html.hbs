@@ -20,6 +20,12 @@
 <body>
     <div id='map' style='width: 400px; height: 300px;'></div>
 
+    <ul>
+        {{#each crimes}}
+        <li>{{this.loc}} | {{this.desc}}</li>
+        {{/each}}
+    </ul>
+
 
 </body>
 

@@ -1,3 +1,7 @@
 
 33.573975, -117.72419, robbery at sharkys
 33.573975, -117.72419, robbery at sharkys pt 2
+47.5859, -122.326, shark attack at sharkys
+47.5859, -122.326, shark attack at sharkys
+47.5859, -122.326, shark attack at sharkys
+-117.72419, 33.573975, example crime
