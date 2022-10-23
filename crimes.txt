@@ -1,2 +1,5 @@
-33.570847, -117.71448, asdasfasf
-33.569405, -117.71419, asdasfasf
+40.41766, -3.6901639, Money Heist at the bank of spain
+47.654057, -122.30692, Vandalism
+47.658, -122.31199, Murder
+47.646008, -122.32027, Robbery
+47.66033, -122.31948, Stabbing near the ave

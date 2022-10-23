@@ -19,12 +19,18 @@
   width: 232px;
   height: 48px;
   margin-left: 35px;
-  margin-top: 60px;
+  margin-top: 10px;
   margin-bottom: 10px;
 
   background: #b1b1b1;
   border: none;
   border-radius: 8px;
+
+  font-family: 'Asap';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
   
 }
 
@@ -57,6 +63,8 @@
   color: white;
   font-size: 46px;
   text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .subtitle {
@@ -107,6 +115,7 @@
 .register {
   margin-top: 50px;
   margin-right: 0px;
+  margin-bottom: 10px;
   background: #f1f1f1;
   width: 380px;
   height: 80px;

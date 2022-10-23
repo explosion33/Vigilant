@@ -23,7 +23,13 @@ use rocket_dyn_templates::Template;
 #[rocket::get("/")]
 async fn index() -> Template {
     println!("{:?}", get_users().unwrap());
-    Template::render("index", rocket_dyn_templates::context!{crimes: get_crimes().await.unwrap()})
+
+    let mut crimes = get_crimes().await.unwrap();
+    while crimes.len() > 4 {
+        crimes.remove(0);
+    }
+
+    Template::render("index", rocket_dyn_templates::context!{crimes: crimes})
 }
 
 
@@ -224,7 +230,7 @@ async fn send_alert(user: &User, crime: &Crime) {
     let twilio = Twilio::new("AC9500dd8203f63e10eb400155ed142e1d", "3cee3a7061d91f73fc1c1cabaf314d62").unwrap();
     
     let mut msg = String::new();
-    msg += "Alert! A crime has been reported within 6 miles of you're location\n";
+    msg += "Alert! A crime has been reported within 6 miles of your location\n";
     msg += "Location | ";
     msg += crime.loc.as_str();
     msg += "\nDescription | ";

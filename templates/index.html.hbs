@@ -1,30 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    <link href="/static/map.css" rel="stylesheet">
+    <link href="/static/report.css" rel="stylesheet">
 
-<head>
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
-<link href="/static/map.css" rel="stylesheet">
-<link href="/static/report.css" rel="stylesheet">
+    <script src="/static/script.js"></script> 
+    <title>Header</title>
+    <link rel="stylesheet" href="/static/header.css">
 
-<script src="/static/script.js"></script> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Asap:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700;800&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  
+  <body>
+    
+    <div class="header">
+      <p class="title">Vigilant</p>
+    </div>
+    
+    <div class="parent">
+      <div class="child">
+        <div class="key">
+          <button id="myBtn", onclick="canReport = !canReport" class="report">Report an Incident</button>
+        </div>
+        <div class="map", id="map" style='width: 1000px; height: 680px;'></div>
+      </div>
+
+      <div class="child">
+        <div class="right">
+          <div class="activity">
+            <p class="subtitle">Recent Activity</p>
+            
+            {{#each crimes}}
+              <div class="card">
+                <div class="time_location">
+                  <p style="padding-left: 8px; padding-top: 2px;"> {{this.loc}}</p>
+                </div>
+                <div class="description">
+                  <p style="padding-left: 8px;">{{this.desc}}</p>
+                </div>
+              </div>
+            {{/each}}
+    
+          <div class="register">
+            <p class="register_text">Register for live text message alerts</p>
+            <div class="signup">
+              <button onclick="isRegistering = true;" class="signup_button">
+                Sign Up
+              </button>
+              <input type="text" id="phone_num" name="num">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 
 
-
-</head>
-
-<body>
-    <div id='map' style='width: 400px; height: 300px;'></div>
-
-    <ul>
-        {{#each crimes}}
-        <li>{{this.loc}} | {{this.desc}}</li>
-        {{/each}}
-    </ul>
-
-
-    <!-- Trigger/Open The Modal -->
-    <button id="myBtn" onclick="canReport = !canReport">Place report</button>
-
-    <!-- The Modal -->
+  <!-- The Modal -->
     <div id="myModal" class="modal">
 
         <!-- Modal content -->
@@ -38,27 +77,16 @@
         </div>
 
     </div>
+</html>
 
-    <form>
-        <label for="num">Enter phone number</label><br>
-        <input type="text" id="phone_num" name="num"><br>
-    </form> 
-    <p id="prompt" style="display: none">Please select a location to be notified for</p>
-    <button id="myBtn" onclick="isRegistering = true; document.getElementById('prompt').style.display='block'">Register</button>
-
-
-</body>
-
-
-
-<script src="/static/map.js"></script> 
-
+<script src="/static/map.js"></script>
 <script>
 window.onload = function WindowLoad(event) {
 {{#each crimes}}
+    var coords = '{{this.loc}} | {{this.desc}}';
     var popup = new mapboxgl.Popup().setText(coords);
     var el = document.createElement('div');
-    var coords = `lat: {{this.long}} <br> lng: {{this.lat}}`;
+    
     el.id = 'marker';
     new mapboxgl.Marker(el)
         .setLngLat([{{this.long}}, {{this.lat}}])
@@ -66,4 +94,4 @@ window.onload = function WindowLoad(event) {
         .addTo(map);   
 {{/each}}
 }
-</script>
+</script> 
