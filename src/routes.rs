@@ -51,6 +51,7 @@ struct User {
 
 #[rocket::post("/report", data = "<data>")]
 async fn report(data: Json<Crime>) -> String {
+    println!("lat: {} lon: {}", data.lat, data.long);
     let mut crime: Crime = Crime{lat: data.lat, long: data.long, desc: data.desc.clone(), loc: "".to_string()};
     add_crime(&crime);
     println!("{:?}", data);
@@ -158,21 +159,39 @@ async fn get_address(lat: f32, long: f32) -> String {
         .text()
         .await.unwrap();
 
+    println!("{}", resp);
+
     let addr = Regex::new(r#"address":"(.*?)","#).unwrap();
     let name = Regex::new(r#"place_name":"(.*?)","#).unwrap();
-    for cap in addr.captures_iter(&resp) {
-        return cap[1].to_string();
-    }
-
     for cap in name.captures_iter(&resp) {
+        println!("2 {:?}", cap[1].to_string());
+        let mut n: Vec<&str> = cap[1].split(",").collect();
+        if (n.len() > 3) {
+            n.remove(n.len()-1);
+            n.remove(n.len()-1);
+            n.remove(n.len()-1);
+        }
+
+        let mut s: String = String::new();
+        for val in n {
+            s += val.trim();
+            s += ", ";
+        }
+        s.remove(s.len()-1);
+        s.remove(s.len()-1);
+
+        return s;
+    }
+    for cap in addr.captures_iter(&resp) {
+        println!("{:?}", cap[1].to_string());
         return cap[1].to_string();
     }
-
     format!("lat:{}, long:{}", lat, long).to_string()
 }
 
 async fn handle_notifications(crime: Crime) {
     for user in get_users().unwrap() {
+        println!("dist: {}", get_distance(&user, &crime));
         if get_distance(&user, &crime) <= 6f32 {
             println!("sending to user {}", user.num);
             send_alert(&user, &crime).await;
@@ -196,12 +215,13 @@ fn get_distance(user: &User, crime: &Crime) -> f32{
     let d_km = 2.0*earth_r_km*((b).asin());
     //println!("d_km: {}", d_km);
     let d_mile = 0.62137119*d_km;
-    return d_mile;
+
+    return d_mile.abs();
 }
 
 
 async fn send_alert(user: &User, crime: &Crime) {
-    let twilio = Twilio::new("AC9500dd8203f63e10eb400155ed142e1d", "ffc4e47ab697e99d441b9e659c42a87a").unwrap();
+    let twilio = Twilio::new("AC9500dd8203f63e10eb400155ed142e1d", "3cee3a7061d91f73fc1c1cabaf314d62").unwrap();
     
     let mut msg = String::new();
     msg += "Alert! A crime has been reported within 6 miles of you're location\n";
@@ -212,7 +232,8 @@ async fn send_alert(user: &User, crime: &Crime) {
 
     println!("{}", ("+".to_string() + user.num.to_string().as_str()).as_str());
 
-    twilio.send_msg("+19704272763", ("+".to_string() + user.num.to_string().as_str()).as_str(), msg.as_str()).run().await.unwrap();
+    let res = twilio.send_msg("+19704272763", "+19494244530", msg.as_str()).run().await.unwrap();
+    println!("{:#?}", res);
 }
 
 pub fn start_api() {
