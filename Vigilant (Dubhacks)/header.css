@@ -1,5 +1,4 @@
 .parent {
-  border: 1px solid black;
 }
 
 .child {
@@ -12,16 +11,32 @@
   height: 680px;
   left: 51px;
   top: 179.5px;
-
-  border: solid;
-  border-color: black;
+  border: none;
   border-radius: 8px;
+}
+
+.report {
+  width: 232px;
+  height: 48px;
+  margin-left: 35px;
+  margin-top: 60px;
+  margin-bottom: 10px;
+
+  background: #b1b1b1;
+  border: none;
+  border-radius: 8px;
+  
 }
 
 .map {
   width: 800px;
   height: 580px;
   background: #EC5E0F;
+  border-color: black;
+  border: solid;
+  border-radius: 8px;
+  margin-right: 150px;
+  margin-left: 35px;
 }
 
 
@@ -58,7 +73,7 @@
 .activity {
   float: right;
   margin-top: 60px;
-  margin-right: 50px;
+  margin-right: 20px;
   background: #f1f1f1;
   height: 580px;
   width: 380px;
