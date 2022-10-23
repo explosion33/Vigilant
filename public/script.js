@@ -54,3 +54,7 @@ let submitForm = function() {
     post_crime(lat, long, document.getElementById("desc").value);
     closeForm();
 }
+
+let validNumber = function(input){
+    return input.length == 11 && !isNaN(input);
+}
