@@ -34,3 +34,23 @@ let register_user = function(num, lat, long) {
 
     xhr.send(JSON.stringify(data));
 }
+
+let displayForm = function() {
+    canReport = false;
+    document.getElementById("myModal").style.display = "block";
+}
+
+let closeForm = function() {
+    let old_marker = document.getElementById("user marker");
+
+    if (old_marker != null) {
+        old_marker.remove();
+    }
+
+    document.getElementById("myModal").style.display = "none";
+}
+
+let submitForm = function() {
+    post_crime(lat, long, document.getElementById("desc").value);
+    closeForm();
+}

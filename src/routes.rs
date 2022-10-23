@@ -181,7 +181,22 @@ async fn handle_notifications(crime: Crime) {
 }
 
 fn get_distance(user: &User, crime: &Crime) -> f32{
-    0f32
+    let earth_r_km = 6371.0 ;
+    let lat1 = user.lat*3.1415926/180.0;
+    let lon1 = user.long*3.1415926/180.0;
+    let lat2 = crime.lat*3.1415926/180.0;
+    let lon2 = crime.long*3.1415926/180.0;
+    
+    let l = (((lat2-lat1)/2.0).sin())*(((lat2-lat1)/2.0).sin());
+    //println!("l: {}", l);
+    let r = (lat1.cos()*lat2.cos())*(((lon2-lon1)/2.0).sin())*(((lon2-lon1)/2.0).sin());
+    //println!("r: {}", r);
+    let b = (l+r).sqrt();
+    //println!("b: {}", b);
+    let d_km = 2.0*earth_r_km*((b).asin());
+    //println!("d_km: {}", d_km);
+    let d_mile = 0.62137119*d_km;
+    return d_mile;
 }
 
 
