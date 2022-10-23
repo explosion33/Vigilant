@@ -1,6 +1,9 @@
 # Vigilant
 A comunity driven crime reporting app created as a part of DubHacks 2022.
 
+![demo gif](https://github.com/explosion33/Vigilant/blob/main/demo.gif)
+<img src="https://github.com/explosion33/Vigilant/blob/main/sms.png" alt="sms demo" width="400"/>
+
 ## About
 Vigilant is a web app where users can report and get notified to crimes in their local communities. Vigilant fills a void in community crime awareness, by allowing for the immediate reporting of crimes. Users can register to recieve SMS messages of crimes within a 6 mile radius of thier chosen location, report crimes they've witnessed and view a heatmap of crimes around their local area
 
