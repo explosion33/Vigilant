@@ -26,3 +26,4 @@ In the future we plan on implemnting:
 * Crime history / analytics
 * Route planning based on predicted crime
 * Collaboration with local authorities
+*
